@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameplaySceneClass: SKScene {
+class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
     
     private var player: Player?;
     
@@ -16,10 +16,13 @@ class GameplaySceneClass: SKScene {
     
     private var canMove = false, moveLeft = false;
     
+    private var itemController = ItemsController();
+    
 
     
     override func didMove(to view: SKView) {
         initializeGame();
+       
         
     }
     
@@ -27,12 +30,6 @@ class GameplaySceneClass: SKScene {
         managePlayer();
     }
     
-    private func initializeGame() {
-        
-        player = childNode(withName: "Player") as? Player!;
-        
-        center = self.frame.size.width / self.frame.size.height;
-    }
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -54,9 +51,63 @@ class GameplaySceneClass: SKScene {
         canMove = false;
     }
     
+    func didBegin(_ contact: SKPhysicsContact) {
+        var firstBody = SKPhysicsBody();
+        var secondBody = SKPhysicsBody();
+        
+        if contact.bodyA.node?.name == "Player" {
+            firstBody = contact.bodyA;
+            secondBody = contact.bodyB;
+            
+        } else {
+                firstBody = contact.bodyB;
+                secondBody = contact.bodyA;
+                
+            }
+        
+        if firstBody.node?.name == "Player" && secondBody.node?.name == "food" {
+            
+            
+       
+            
+        }
+        if firstBody.node?.name == "Player" && secondBody.node?.name == "bomb" {
+            firstBody.node?.removeFromParent();
+            secondBody.node?.removeFromParent();
+            
+            Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
+            
+        }
+    }
+    
+    private func initializeGame() {
+        
+        physicsWorld.contactDelegate = self;
+        
+        player = childNode(withName: "Player") as? Player!;
+        player?.initializePlayer();
+        
+        center = self.frame.size.width / self.frame.size.height;
+        
+        Timer.scheduledTimer(timeInterval: TimeInterval(itemController.randomBetweenNumbers(firstNum: 1, secondNum: 2)), target: self, selector: #selector(GameplaySceneClass.spawnItems), userInfo: nil, repeats: true)
+    }
+    
     private func managePlayer() {
         if canMove {
             player?.move(left: moveLeft)
         }
     }
+    
+    
+    func spawnItems() {
+        self.scene?.addChild(itemController.spawnItems());
+    }
+    
+    func restartGame() {
+        if let scene = GameplaySceneClass(fileNamed: "GameplayScene") {
+            scene.scaleMode = .aspectFill
+            view?.presentScene(scene, transition: SKTransition.doorway(withDuration: 2))
+        }
+    }
+    
 } //class

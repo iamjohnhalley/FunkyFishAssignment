@@ -19,6 +19,7 @@
 		524B8AFA1EBB2B8800AFD1EC /* GameplaySceneClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524B8AF91EBB2B8800AFD1EC /* GameplaySceneClass.swift */; };
 		524B8AFC1EBB32EB00AFD1EC /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524B8AFB1EBB32EB00AFD1EC /* GameViewController.swift */; };
 		524B8AFF1EBB395A00AFD1EC /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524B8AFE1EBB395A00AFD1EC /* Player.swift */; };
+		524B8B021EBB49F900AFD1EC /* ItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524B8B011EBB49F900AFD1EC /* ItemController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		524B8AF91EBB2B8800AFD1EC /* GameplaySceneClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameplaySceneClass.swift; sourceTree = "<group>"; };
 		524B8AFB1EBB32EB00AFD1EC /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		524B8AFE1EBB395A00AFD1EC /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		524B8B011EBB49F900AFD1EC /* ItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		524B8AF21EBB28BE00AFD1EC /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				524B8B001EBB49D300AFD1EC /* Items Controller Classes */,
 				524B8AFD1EBB394900AFD1EC /* Player Class */,
 				524B8AF31EBB28C600AFD1EC /* Scene Classes */,
 			);
@@ -115,6 +118,14 @@
 				524B8AFE1EBB395A00AFD1EC /* Player.swift */,
 			);
 			name = "Player Class";
+			sourceTree = "<group>";
+		};
+		524B8B001EBB49D300AFD1EC /* Items Controller Classes */ = {
+			isa = PBXGroup;
+			children = (
+				524B8B011EBB49F900AFD1EC /* ItemController.swift */,
+			);
+			name = "Items Controller Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +204,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				524B8B021EBB49F900AFD1EC /* ItemController.swift in Sources */,
 				524B8AFC1EBB32EB00AFD1EC /* GameViewController.swift in Sources */,
 				524B8AF51EBB28EA00AFD1EC /* MainMenuScene.swift in Sources */,
 				524B8ADE1EBB27F100AFD1EC /* GameScene.swift in Sources */,

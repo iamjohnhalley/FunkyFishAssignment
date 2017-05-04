@@ -12,6 +12,16 @@ class Player: SKSpriteNode {
     
     private var minX = CGFloat(-182.375), maxX = CGFloat(182.375);
     
+    func initializePlayer() {
+        name = "Player";
+        
+        physicsBody = SKPhysicsBody(circleOfRadius: size.height / 2);
+        physicsBody?.affectedByGravity = false;
+        physicsBody?.isDynamic = false;
+        physicsBody?.contactTestBitMask = ColliderType.FOOD_AND_BOMB;
+        
+    }
+    
     func move(left: Bool) {
         
         if left {
