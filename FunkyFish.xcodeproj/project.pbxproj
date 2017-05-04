@@ -372,6 +372,7 @@
 				524B8AEE1EBB27F100AFD1EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

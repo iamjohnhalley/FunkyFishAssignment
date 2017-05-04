@@ -5,8 +5,9 @@
 //  Created by John on 04/05/2017.
 //  Copyright © 2017 John. All rights reserved.
 //
-
+import UIKit
 import SpriteKit
+
 
 class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
     
@@ -18,10 +19,14 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
     
     private var itemController = ItemsController();
     
+    private var scoreLabel: SKLabelNode?;
+    private var score = 0;
+    private var highestScore = 0
 
     
     override func didMove(to view: SKView) {
         initializeGame();
+        
        
         
     }
@@ -67,7 +72,17 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
         
         if firstBody.node?.name == "Player" && secondBody.node?.name == "food" {
             
+            score += 1;
+            scoreLabel?.text = String(score);
+            secondBody.node?.removeFromParent();
             
+            if (score > highestScore){
+                highestScore = score
+                
+                
+                UserDefaults.standard.setValue(highestScore, forKey: "HighScore")
+                
+            }
        
             
         }
@@ -75,7 +90,9 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
             firstBody.node?.removeFromParent();
             secondBody.node?.removeFromParent();
             
-            Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
+            Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(MainMenuScene.ShowMainMenu), userInfo: nil, repeats: false);
+                //(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
+            
             
         }
     }
@@ -87,9 +104,15 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
         player = childNode(withName: "Player") as? Player!;
         player?.initializePlayer();
         
+        scoreLabel = childNode(withName: "scoreLabel") as?
+            SKLabelNode!;
+        scoreLabel?.text = "0";
+        
         center = self.frame.size.width / self.frame.size.height;
         
         Timer.scheduledTimer(timeInterval: TimeInterval(itemController.randomBetweenNumbers(firstNum: 1, secondNum: 2)), target: self, selector: #selector(GameplaySceneClass.spawnItems), userInfo: nil, repeats: true)
+        
+        Timer.scheduledTimer(timeInterval: TimeInterval(7), target: self, selector: #selector(GameplaySceneClass.removeItems), userInfo: nil, repeats: true);
     }
     
     private func managePlayer() {
@@ -103,11 +126,38 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
         self.scene?.addChild(itemController.spawnItems());
     }
     
+    
+    //restart the game
     func restartGame() {
         if let scene = GameplaySceneClass(fileNamed: "GameplayScene") {
             scene.scaleMode = .aspectFill
             view?.presentScene(scene, transition: SKTransition.doorway(withDuration: 2))
         }
     }
+    
+    //show main menu
+    func ShowMainMenu() {
+        if let scene = MainMenuScene(fileNamed: "MainMenu") {
+            scene.scaleMode = .aspectFill
+            view?.presentScene(scene, transition: SKTransition.crossFade(withDuration: 1))
+        }
+    }
+    
+    
+    //remove the fruit & bombs that have dropped under the screne
+    func removeItems() {
+        for child in children {
+            
+            if child.name == "food" || child.name == "bomb" {
+                if child.position.y < -self.scene!.frame.height - 100 {
+                    child.removeFromParent();
+                    
+                }
+                
+            }
+        }
+        
+    }
+    
     
 } //class

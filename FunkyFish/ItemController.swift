@@ -36,7 +36,7 @@ class ItemsController {
             
             item = SKSpriteNode(imageNamed: "food \(num)");
             item!.name = "food";
-            item!.setScale(0.7);
+            item!.setScale(0.2);
             item!.physicsBody = SKPhysicsBody(circleOfRadius: item!.size.height / 2);
             
             
