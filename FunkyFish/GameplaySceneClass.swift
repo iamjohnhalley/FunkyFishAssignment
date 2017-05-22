@@ -6,19 +6,16 @@
 //  Copyright © 2017 John. All rights reserved.
 //
 import UIKit
-import SpriteKit
+import SpriteKit//
+
 
 
 class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
     
     private var player: Player?;
-    
     private var center = CGFloat();
-    
     private var canMove = false, moveLeft = false;
-    
     private var itemController = ItemsController();
-    
     private var scoreLabel: SKLabelNode?;
     private var score = 0;
     private var highestScore = 0
@@ -26,8 +23,6 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         initializeGame();
-        
-       
         
     }
     
@@ -40,6 +35,66 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self);
+            
+            if (score >= 5) {
+                
+                self.physicsWorld.gravity = (CGVector(dx: 0, dy: -7.8))
+                //physicsWorld.contactDelegate = self
+            }
+            
+            if (score >= 10) {
+                
+                self.physicsWorld.gravity = (CGVector(dx: 0, dy: -8.8))
+                //physicsWorld.contactDelegate = self
+            }
+            
+            if (score >= 15) {
+                
+                self.physicsWorld.gravity = (CGVector(dx: 0, dy: -9.8))
+                //physicsWorld.contactDelegate = self
+            }
+            
+            if (score >= 20) {
+                
+                self.physicsWorld.gravity = (CGVector(dx: 0, dy: -10.8))
+                //physicsWorld.contactDelegate = self
+            }
+            
+            if (score >= 25) {
+                
+                self.physicsWorld.gravity = (CGVector(dx: 0, dy: -10.8))
+                //physicsWorld.contactDelegate = self
+            }
+            
+            if (score >= 30) {
+                
+                self.physicsWorld.gravity = (CGVector(dx: 0, dy: -11.8))
+                //physicsWorld.contactDelegate = self
+            }
+            
+            if (score >= 35) {
+                
+                self.physicsWorld.gravity = (CGVector(dx: 0, dy: -12.8))
+                //physicsWorld.contactDelegate = self
+            }
+            
+            if (score >= 40) {
+                
+                self.physicsWorld.gravity = (CGVector(dx: 0, dy: -13.8))
+                //physicsWorld.contactDelegate = self
+            }
+            
+            if (score >= 45) {
+                
+                self.physicsWorld.gravity = (CGVector(dx: 0, dy: -13.8))
+                //physicsWorld.contactDelegate = self
+            }
+            
+            if (score >= 50) {
+                
+                self.physicsWorld.gravity = (CGVector(dx: 0, dy: -14.8))
+            }
+            
             
             if location.x > center {
                 moveLeft = false;
@@ -72,9 +127,13 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
         
         if firstBody.node?.name == "Player" && secondBody.node?.name == "food" {
             
+            //play sound if user gets a point
+            self.run(SKAction.playSoundFileNamed("coin.wav", waitForCompletion: true))
+            
             score += 1;
             scoreLabel?.text = String(score);
             secondBody.node?.removeFromParent();
+            
             
             if (score > highestScore){
                 highestScore = score
@@ -89,6 +148,9 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
         if firstBody.node?.name == "Player" && secondBody.node?.name == "bomb" {
             firstBody.node?.removeFromParent();
             secondBody.node?.removeFromParent();
+            
+            //play sound if player dies
+            self.run(SKAction.playSoundFileNamed("die.wav", waitForCompletion: true))
             
             Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(MainMenuScene.ShowMainMenu), userInfo: nil, repeats: false);
                 //(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
@@ -140,6 +202,8 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
         if let scene = MainMenuScene(fileNamed: "MainMenu") {
             scene.scaleMode = .aspectFill
             view?.presentScene(scene, transition: SKTransition.crossFade(withDuration: 1))
+            
+            counter = 0
         }
     }
     

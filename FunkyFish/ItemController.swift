@@ -14,9 +14,14 @@ struct ColliderType {
     
 }
 
-class ItemsController {
+    //var duration: TimeInterval = 0.35
+    var counter: UInt = 0
+
+class ItemsController{
     
     private var minX = CGFloat(-182.375), maxX = CGFloat(182.375);
+    
+
     
     func spawnItems() -> SKSpriteNode {
         let item: SKSpriteNode?;
@@ -29,7 +34,10 @@ class ItemsController {
             item!.name = "bomb";
             item!.setScale(0.3);
             item!.physicsBody = SKPhysicsBody(circleOfRadius: item!.size.height / 2);
-      
+          
+         
+         
+            
         } else {
             
             let num = Int(randomBetweenNumbers(firstNum: 1, secondNum: 5));
@@ -39,8 +47,8 @@ class ItemsController {
             item!.setScale(0.2);
             item!.physicsBody = SKPhysicsBody(circleOfRadius: item!.size.height / 2);
             
-            
         }
+
         
         item!.physicsBody?.categoryBitMask = ColliderType.FOOD_AND_BOMB;
         
@@ -58,5 +66,8 @@ class ItemsController {
         return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum);
         
     }
+    
+   
+  
     
 } // class

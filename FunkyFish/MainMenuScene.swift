@@ -11,19 +11,26 @@ import SpriteKit
 class MainMenuScene: SKScene {
     
      private var highScore: SKLabelNode?;
-     private var myScore = 0
+     private var myScore = String("0")
     
    
     
     
-    override func didMove(to view: SKView) {
-        let myScore = ("\(UserDefaults.standard.value(forKey: "HighScore")!)")
-        print(myScore)
-        
-        highScore = childNode(withName: "highScore") as?
-            SKLabelNode!;
-        highScore!.text = myScore
-    }
+//    override func didMove(to view: SKView) {
+//        
+//        if (myScore != nil){
+//    
+//        self.myScore = ("\(UserDefaults.standard.value(forKey: "HighScore")!)")
+//       
+//        
+//        highScore = childNode(withName: "highScore") as?
+//            SKLabelNode!;
+//        highScore!.text = myScore
+//        print(counter,"this is counting")
+//        } else {
+//            print("score is 0")
+//        }
+//    }
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
