@@ -19,6 +19,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
     private var scoreLabel: SKLabelNode?;
     private var score = 0;
     private var highestScore = 0
+    private var newScore = 0
 
     
     override func didMove(to view: SKView) {
@@ -136,16 +137,28 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
             secondBody.node?.removeFromParent();
             
             
-            if (score > highestScore){
-                highestScore = score
-                
-                
-                UserDefaults.standard.setValue(highestScore, forKey: "HighScore")
-                
-            }
-       
+//            if (score > highestScore){
+//                highestScore = score
+//                
+//                
+//                UserDefaults.standard.setValue(highestScore, forKey: "HighScore")
+//                
+//            }
             
+            //let authtoken = "12345"
+            
+            if (score > highestScore) {
+                
+            newScore = score
+            // Userdefaults helps to store session data locally
+            let defaults = UserDefaults.standard
+            defaults.set(newScore, forKey: "authtoken")
+            
+            defaults.synchronize()
+
+            }
         }
+        
         if firstBody.node?.name == "Player" && secondBody.node?.name == "bomb" {
             firstBody.node?.removeFromParent();
             secondBody.node?.removeFromParent();

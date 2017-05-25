@@ -18,10 +18,12 @@ class MainMenuScene: SKScene {
   
    
     
-//    
-//    override func didMove(to view: SKView) {
-//        
+    
+    override func didMove(to view: SKView) {
+        
 //        if (myScore == nil){
+//            
+//            highScore!.text = "0"
 //            
 //            print("score is 0")
 //
@@ -36,7 +38,18 @@ class MainMenuScene: SKScene {
 //            highScore!.text = myScore
 //            print(counter,"this is counting")
 //         }
-//    }
+        
+        if UserDefaults.standard.string(forKey: "authtoken") != nil {
+            
+            //perform your task on success }
+            highScore = childNode(withName: "highScore") as?
+            SKLabelNode!;
+            highScore!.text = myScore
+        
+        
+        }
+    }
+    
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
