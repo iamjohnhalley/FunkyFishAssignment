@@ -16,7 +16,7 @@ struct ColliderType {
     
 }
 
-    //var duration: TimeInterval = 0.35
+    
     var counter: UInt = 0
 
 
