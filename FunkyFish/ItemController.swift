@@ -11,11 +11,14 @@ import SpriteKit
 struct ColliderType {
     static let PLAYER: UInt32 = 0;
     static let FOOD_AND_BOMB: UInt32 = 1;
+   
+    
     
 }
 
     //var duration: TimeInterval = 0.35
     var counter: UInt = 0
+
 
 class ItemsController{
     
@@ -24,21 +27,21 @@ class ItemsController{
 
     
     func spawnItems() -> SKSpriteNode {
-        let item: SKSpriteNode?;
+        var item: SKSpriteNode?;
         
         
         
         if Int(randomBetweenNumbers(firstNum: 0, secondNum: 10)) >=
-            6 {
+            6  {
             item = SKSpriteNode (imageNamed: "bomb");
             item!.name = "bomb";
             item!.setScale(0.3);
             item!.physicsBody = SKPhysicsBody(circleOfRadius: item!.size.height / 2);
-          
-         
-         
+
+        }
             
-        } else {
+    
+       else {
             
             let num = Int(randomBetweenNumbers(firstNum: 1, secondNum: 5));
             
@@ -48,6 +51,7 @@ class ItemsController{
             item!.physicsBody = SKPhysicsBody(circleOfRadius: item!.size.height / 2);
             
         }
+        
 
         
         item!.physicsBody?.categoryBitMask = ColliderType.FOOD_AND_BOMB;
@@ -60,6 +64,7 @@ class ItemsController{
         
         return item!;
     }
+    
     
     func randomBetweenNumbers(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat {
         //return a random number between two numbers

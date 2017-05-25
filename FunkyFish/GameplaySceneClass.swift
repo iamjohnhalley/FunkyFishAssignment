@@ -36,59 +36,60 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
         for touch in touches {
             let location = touch.location(in: self);
             
+            
+            
             if (score >= 5) {
                 
                 self.physicsWorld.gravity = (CGVector(dx: 0, dy: -7.8))
-                //physicsWorld.contactDelegate = self
+                
             }
             
             if (score >= 10) {
                 
                 self.physicsWorld.gravity = (CGVector(dx: 0, dy: -8.8))
-                //physicsWorld.contactDelegate = self
+                
+                
             }
             
             if (score >= 15) {
                 
                 self.physicsWorld.gravity = (CGVector(dx: 0, dy: -9.8))
-                //physicsWorld.contactDelegate = self
+                
             }
             
-            if (score >= 20) {
+            if (score >= 20) {   
+                self.physicsWorld.gravity = (CGVector(dx: -0.8, dy: -10.8))
                 
-                self.physicsWorld.gravity = (CGVector(dx: 0, dy: -10.8))
-                //physicsWorld.contactDelegate = self
             }
             
             if (score >= 25) {
                 
-                self.physicsWorld.gravity = (CGVector(dx: 0, dy: -10.8))
-                //physicsWorld.contactDelegate = self
+                self.physicsWorld.gravity = (CGVector(dx: -2.8, dy: -10.8))
+                
             }
             
             if (score >= 30) {
                 
-                self.physicsWorld.gravity = (CGVector(dx: 0, dy: -11.8))
-                //physicsWorld.contactDelegate = self
+                self.physicsWorld.gravity = (CGVector(dx: -3.8, dy: -11.8))
+                
             }
             
             if (score >= 35) {
                 
-                self.physicsWorld.gravity = (CGVector(dx: 0, dy: -12.8))
-                //physicsWorld.contactDelegate = self
+                self.physicsWorld.gravity = (CGVector(dx: -4.8, dy: -12.8))
+                
             }
             
             if (score >= 40) {
                 
                 self.physicsWorld.gravity = (CGVector(dx: 0, dy: -13.8))
-                //physicsWorld.contactDelegate = self
+                
             }
             
             if (score >= 45) {
                 
                 self.physicsWorld.gravity = (CGVector(dx: 0, dy: -13.8))
-                //physicsWorld.contactDelegate = self
-            }
+                            }
             
             if (score >= 50) {
                 
@@ -152,8 +153,10 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
             //play sound if player dies
             self.run(SKAction.playSoundFileNamed("die.wav", waitForCompletion: true))
             
-            Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(MainMenuScene.ShowMainMenu), userInfo: nil, repeats: false);
-                //(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
+            Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector:
+                //#selector(MainMenuScene.ShowMainMenu), userInfo: nil, repeats: false);
+                #selector(GameOverScene.ShowGameOverScene), userInfo: nil, repeats: false);
+                //#selector(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
             
             
         }
@@ -174,7 +177,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
         
         Timer.scheduledTimer(timeInterval: TimeInterval(itemController.randomBetweenNumbers(firstNum: 1, secondNum: 2)), target: self, selector: #selector(GameplaySceneClass.spawnItems), userInfo: nil, repeats: true)
         
-        Timer.scheduledTimer(timeInterval: TimeInterval(7), target: self, selector: #selector(GameplaySceneClass.removeItems), userInfo: nil, repeats: true);
+        Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(GameplaySceneClass.removeItems), userInfo: nil, repeats: true);
     }
     
     private func managePlayer() {
@@ -204,6 +207,13 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
             view?.presentScene(scene, transition: SKTransition.crossFade(withDuration: 1))
             
             counter = 0
+        }
+    }
+    
+    func ShowGameOverScene() {
+        if let scene = GameOverScene(fileNamed: "GameOver") {
+            scene.scaleMode = .aspectFill
+            view?.presentScene(scene, transition: SKTransition.crossFade(withDuration: 1))
         }
     }
     

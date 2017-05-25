@@ -12,24 +12,30 @@ class MainMenuScene: SKScene {
     
      private var highScore: SKLabelNode?;
      private var myScore = String("0")
-    
+     private var player: Player?;
    
     
+  
+   
     
+//    
 //    override func didMove(to view: SKView) {
 //        
-//        if (myScore != nil){
-//    
-//        self.myScore = ("\(UserDefaults.standard.value(forKey: "HighScore")!)")
-//       
-//        
-//        highScore = childNode(withName: "highScore") as?
-//            SKLabelNode!;
-//        highScore!.text = myScore
-//        print(counter,"this is counting")
-//        } else {
+//        if (myScore == nil){
+//            
 //            print("score is 0")
-//        }
+//
+//       
+//        } else {
+//            
+//             self.myScore = ("\(UserDefaults.standard.value(forKey: "HighScore")!)")
+//            
+//            
+//            highScore = childNode(withName: "highScore") as?
+//                SKLabelNode!;
+//            highScore!.text = myScore
+//            print(counter,"this is counting")
+//         }
 //    }
     
     
@@ -46,11 +52,32 @@ class MainMenuScene: SKScene {
                     scene.scaleMode = .aspectFill
                     
                     // Present the scene
-                    view!.presentScene(scene, transition: SKTransition.crossFade(withDuration: 2))
-                }
+                    view!.presentScene(scene, transition: SKTransition.push(with: .up, duration: 2))  }
                 
             }
         }
+        
+        for touch in touches {
+            let location = touch.location(in: self);
+            
+            if atPoint(location).name == "sound" {
+                
+                self.run(SKAction.playSoundFileNamed("coin.wav", waitForCompletion: true))
+                
+            }
+        }
+        
+        for touch in touches {
+            let location = touch.location(in: self);
+            
+            if atPoint(location).name == "mute" {
+               
+                
+                
+            }
+        }
+
+        
     }
     
     //show main menu
@@ -60,5 +87,7 @@ class MainMenuScene: SKScene {
             view?.presentScene(scene, transition: SKTransition.crossFade(withDuration: 1))
         }
     }
+    
+    
 
 } //class
