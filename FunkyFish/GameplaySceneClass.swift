@@ -6,7 +6,7 @@
 //  Copyright © 2017 John. All rights reserved.
 //
 import UIKit
-import SpriteKit//
+import SpriteKit
 
 
 
@@ -17,7 +17,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
     private var canMove = false, moveLeft = false;
     private var itemController = ItemsController();
     private var scoreLabel: SKLabelNode?;
-    private var score = 0;
+    public var score = 0;
     private var highestScore = 0
     private var newScore = 0
 
@@ -137,26 +137,14 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
             secondBody.node?.removeFromParent();
             
             
-//            if (score > highestScore){
-//                highestScore = score
-//                
-//                
-//                UserDefaults.standard.setValue(highestScore, forKey: "HighScore")
-//                
-//            }
-            
-            //let authtoken = "12345"
-            
-            if (score > highestScore) {
+            if (score > highestScore){
+                highestScore = score
                 
-            newScore = score
-            // Userdefaults helps to store session data locally
-            let defaults = UserDefaults.standard
-            defaults.set(newScore, forKey: "authtoken")
-            
-            defaults.synchronize()
-
+                
+                UserDefaults.standard.setValue(highestScore, forKey: "HighScore")
+                
             }
+
         }
         
         if firstBody.node?.name == "Player" && secondBody.node?.name == "bomb" {

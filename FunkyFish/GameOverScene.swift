@@ -11,6 +11,8 @@ import SpriteKit
 import UIKit
 
 class GameOverScene: SKScene {
+    
+    private var myScoreLabel: SKLabelNode?;
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -18,6 +20,7 @@ class GameOverScene: SKScene {
         
         for touch in touches {
             let location = touch.location(in: self);
+            
             
             if atPoint(location).name == "startAgain" {
                 if let scene = GameplaySceneClass(fileNamed: "GameplayScene") {
